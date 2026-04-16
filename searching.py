@@ -60,8 +60,12 @@ def binary_search(seq, number):
     indexy = [0, len(seq)-1]
     while True:
         polovica = (indexy[0] + indexy[1])//2
-        if indexy[0]+1 == indexy[1]:
+        if indexy[0]+1 == indexy[1] and seq[indexy[1]] != number and seq[indexy[0]] != number:
             return None
+        if indexy[0] + 1 == indexy[1] and seq[indexy[0]] == number:
+            return indexy[0]
+        if indexy[0] + 1 == indexy[1] and seq[indexy[1]] == number:
+            return indexy[1]
         if seq[polovica] == number:
             return polovica
         if number > seq[polovica]:
@@ -79,6 +83,6 @@ def main():
     unordered = read_data("sequential.json", "unordered_numbers")
     sekvencia = read_data("sequential.json", "dna_sequence")
     print(linear_search(ordered, 13))
-    print(binary_search(ordered, 14))
+    print(binary_search(ordered, 13))
 if __name__ == '__main__':
     main()
