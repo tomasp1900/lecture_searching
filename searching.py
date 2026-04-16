@@ -1,6 +1,11 @@
 import os
 import json
+import random
+import matplotlib.pyplot as plt
+from numpy.ma.core import append
 
+import generators
+import time
 
 # get current working directory path
 cwd_path = os.getcwd()
@@ -75,6 +80,46 @@ def binary_search(seq, number):
             indexy[1] = polovica
             continue
 
+def cas(dlzky):
+    zoznamy_ordered = []
+    zoznamy_unordered = []
+    for dlzka in dlzky:
+        zoznamy_ordered.append(generators.ordered_sequence(dlzka))
+        zoznamy_unordered.append(generators.unordered_sequence(dlzka))
+    targets_ordered = [random.choice(zoznam1) for zoznam1 in zoznamy_ordered]
+    targets_unordered = [random.choice(zoznam2) for zoznam2 in zoznamy_unordered]
+
+    casy_lin = []
+    for zoznam_ordered, target_ordered in zip(zoznamy_ordered, targets_ordered):
+        start1 = time.perf_counter()
+        linear_search(zoznam_ordered, target_ordered)
+        end1 = time.perf_counter()
+        duration1 = end1 - start1
+        casy_lin.append(duration1)
+
+    casy_bin = []
+    for zoznam_unordered, target_unordered in zip(zoznamy_unordered, targets_unordered):
+        start2 = time.perf_counter()
+        binary_search(zoznam_unordered, target_unordered)
+        end2 = time.perf_counter()
+        duration2 = end2 - start2
+        casy_bin.append(duration2)
+
+    fig, (lin, bin) = plt.subplots(1, 2)
+
+    lin.plot(dlzky, casy_lin)
+    lin.set_xlabel("Velikost vstupu")
+    lin.set_ylabel("Čas [s]")
+    lin.set_title("Linear Search")
+
+    bin.plot(dlzky, casy_bin)
+    bin.set_xlabel("Velikost vstupu")
+    bin.set_ylabel("Čas [s]")
+    bin.set_title("Binary Search")
+
+    plt.show()
+
+
 def main():
     # file_name = "sequential.json"
     #
@@ -84,5 +129,6 @@ def main():
     sekvencia = read_data("sequential.json", "dna_sequence")
     print(linear_search(ordered, 13))
     print(binary_search(ordered, 13))
+    print(cas([100, 500, 1000, 5000, 10000]))
 if __name__ == '__main__':
     main()
