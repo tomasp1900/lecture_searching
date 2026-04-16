@@ -58,26 +58,40 @@ def pattern_search(seq, pattern):
 
 
 def binary_search(seq, number):
-    left, right = (0, len(seq) - 1)
-
-    while left <= right:
-        middle = (right + left) // 2
-
-        if number < seq[middle]:
-            right = middle - 1
-        elif number > seq[middle]:
-            left = middle + 1
-        else:
-            return
-    return
-
+    # left, right = (0, len(seq) - 1)
+    #
+    # while left <= right:
+    #     middle = (right + left) // 2
+    #
+    #     if number < seq[middle]:
+    #         right = middle - 1
+    #     elif number > seq[middle]:
+    #         left = middle + 1
+    #     else:
+    #         return
+    # return
+    indexy = [0, len(seq)-1]
+    while True:
+        polovica = (indexy[0] + indexy[1])//2
+        if indexy[0]+1 == indexy[1]:
+            return None
+        if seq[polovica] == number:
+            return polovica
+        if number > seq[polovica]:
+            indexy[0] = polovica
+            continue
+        if number < seq[polovica]:
+            indexy[1] = polovica
+            continue
 
 def main():
-    file_name = "sequential.json"
-
-    seq = read_data(file_name, field="unordered_numbers")
-    # print(seq)
-    print(linear_search([-51, -12, -3, -3, -1, 2, 8, 13, 14, 14, 14, 21, 22, 23, 24, 25, 48, 63, 64, 70, 72, 78, 90, 102, 120], 14))
-
+    # file_name = "sequential.json"
+    #
+    # seq = read_data(file_name, field="unordered_numbers")
+    ordered = read_data("sequential.json", "ordered_numbers")
+    unordered = read_data("sequential.json", "unordered_numbers")
+    sekvencia = read_data("sequential.json", "dna_sequence")
+    print(linear_search(ordered, 13))
+    print(binary_search(ordered, 14))
 if __name__ == '__main__':
     main()
