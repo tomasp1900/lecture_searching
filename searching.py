@@ -27,18 +27,15 @@ def linear_search(seq, number):
     """
     :reurn (dict): {'positions': <list of indicies>, 'count': <total count>}
     """
-    indices = []
-    count = 0
+    pozice = []
+    pocet = 0
 
-    idx = 0
-    while idx < len(seq):
-        if seq[idx] == number:
-            indices.append(idx)
-            count += 1
-        idx += 1
+    for i in range(len(seq)):
+        if seq[i] == number:
+            pozice.append(i)
+            pocet += 1
 
-    return {"positions": indices, "count": count}
-
+    return {"positions": pozice, "count": pocet}
 
 def pattern_search(seq, pattern):
 
@@ -79,8 +76,8 @@ def main():
     file_name = "sequential.json"
 
     seq = read_data(file_name, field="unordered_numbers")
-    print(seq)
-
+    # print(seq)
+    print(linear_search([-51, -12, -3, -3, -1, 2, 8, 13, 14, 14, 14, 21, 22, 23, 24, 25, 48, 63, 64, 70, 72, 78, 90, 102, 120], 14))
 
 if __name__ == '__main__':
     main()
