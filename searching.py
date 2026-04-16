@@ -58,18 +58,6 @@ def pattern_search(seq, pattern):
 
 
 def binary_search(seq, number):
-    # left, right = (0, len(seq) - 1)
-    #
-    # while left <= right:
-    #     middle = (right + left) // 2
-    #
-    #     if number < seq[middle]:
-    #         right = middle - 1
-    #     elif number > seq[middle]:
-    #         left = middle + 1
-    #     else:
-    #         return
-    # return
     indexy = [0, len(seq)-1]
     while True:
         polovica = (indexy[0] + indexy[1])//2
