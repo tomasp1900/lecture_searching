@@ -37,24 +37,23 @@ def linear_search(seq, number):
 
     return {"positions": pozice, "count": pocet}
 
-def pattern_search(seq, pattern):
-
-    indicies = set()
-    pattern_size = len(pattern)
-
-    left_idx = 0
-    right_idx = pattern_size
-    while right_idx< len(seq):
-        for idx in range(pattern_size):
-            if pattern[idx] != seq[left_idx + idx]:
-                break
-            else:
-                indicies.add(left_idx + pattern_size // 2)
-
-            left_idx += 1
-            right_idx += 1
-        return indicies
-
+# def pattern_search(seq, pattern):
+#
+#     indicies = set()
+#     pattern_size = len(pattern)
+#
+#     left_idx = 0
+#     right_idx = pattern_size
+#     while right_idx< len(seq):
+#         for idx in range(pattern_size):
+#             if pattern[idx] != seq[left_idx + idx]:
+#                 break
+#             else:
+#                 indicies.add(left_idx + pattern_size // 2)
+#
+#             left_idx += 1
+#             right_idx += 1
+#         return indicies
 
 
 def binary_search(seq, number):
